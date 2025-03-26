@@ -125,18 +125,18 @@
     </div>
 
     <script>
-        // DOM Elements
+        
         const taskInput = document.getElementById('task-input');
         const addTaskBtn = document.getElementById('add-task-btn');
         const todoList = document.getElementById('todo-list');
 
-        // Load tasks from localStorage
+        
         function loadTasks() {
             const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
             tasks.forEach(task => createTaskElement(task.text, task.completed));
         }
 
-        // Save tasks to localStorage
+        
         function saveTasks() {
             const tasks = Array.from(todoList.children).map(taskItem => ({
                 text: taskItem.querySelector('span').textContent,
@@ -145,14 +145,14 @@
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
 
-        // Create a new task element
+        
         function createTaskElement(taskText, isCompleted = false) {
-            // Create list item
+            
             const taskItem = document.createElement('li');
             taskItem.classList.add('todo-item');
             if (isCompleted) taskItem.classList.add('completed');
 
-            // Create task text span
+            
             const taskSpan = document.createElement('span');
             taskSpan.textContent = taskText;
             taskSpan.addEventListener('click', () => {
@@ -160,7 +160,7 @@
                 saveTasks();
             });
 
-            // Create delete button
+           
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = 'Delete';
             deleteBtn.classList.add('delete-btn');
@@ -169,29 +169,28 @@
                 saveTasks();
             });
 
-            // Append elements
+           
             taskItem.appendChild(taskSpan);
             taskItem.appendChild(deleteBtn);
             todoList.appendChild(taskItem);
         }
 
-        // Add new task
+       
         function addTask() {
             const taskText = taskInput.value.trim();
             if (taskText) {
                 createTaskElement(taskText);
-                taskInput.value = ''; // Clear input
+                taskInput.value = ''; 
                 saveTasks();
             }
         }
 
-        // Event Listeners
+       
         addTaskBtn.addEventListener('click', addTask);
         taskInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') addTask();
         });
 
-        // Load existing tasks on page load
         loadTasks();
     </script>
 </body>
