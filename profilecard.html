@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    
+    <title>Aryan Gupta - Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .profile-card {
+            width: 380px;
+            background: linear-gradient(45deg, #4ecdc4, #45b7d1);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 30px;
+            color: white;
+            transition: all 0.4s ease;
+            perspective: 1000px;
+        }
+
+        .profile-card:hover {
+            transform: rotateY(10deg) scale(1.05);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(255,255,255,0.6);
+            margin: 0 auto 20px;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .profile-card:hover .profile-pic {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .name {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .designation {
+            font-size: 18px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .bio {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 28px;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .social-icons a::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: scale(0);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-10px) rotate(10deg);
+            color: #f0f0f0;
+        }
+
+        .social-icons a:hover::before {
+            transform: scale(1.5);
+        }
+
+        
+
+        @media (max-width: 480px) {
+            .profile-card {
+                width: 95%;
+                max-width: 380px;
+                padding: 20px;
+            }
+        }
+i{
+    color: lightblue;
+}
+
+        .linkedin { color: #0077B5; }
+        .github { color: black; }
+        .twitter { color: #1DA1F2; }
+        .instagram { color: #E1306C; }
+        .leetcode { color: #FFA116; }
+
+       
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="profile-card">
+        <img src="./aryan passport size photo.jpg" alt="Aryan Gupta" class="profile-pic">
+        <div class="name">Aryan Gupta</div>
+        <div class="designation">Computer Science Graduate</div>
+        
+        <div class="contact-info">
+            <p><i class="fa-solid fa-envelope"></i> garyan893@gmail.com</p>
+            <p><i class="fa-solid fa-mobile-screen-button"></i> 7828741120</p>
+            <p><i class="fa-solid fa-location-dot"></i> Bengaluru</p>
+            <p><i class="fa-solid fa-cake-candles"></i> 30/01/2001</p>
+        </div>
+
+        <p class="bio">Motivated Computer Science graduate with a focus on software development. Experienced in developing Java projects and software solutions. Certified and skilled in Java programming. Strong problem-solving abilities and effective communication skills. Eager to apply expertise in a challenging software development role.</p>
+
+        <div class="social-icons">
+            <a href="https://linkedin.com/in/aryan-gupta-574725184/"  target="_blank"  title="LinkedIn Profile"><i class="fa-brands fa-linkedin-in  linkedin"></i></a>
+            <a href="https://github.com/garyan893" target="_blank"  title="GitHub Profile"><i class="fa-brands fa-github github"></i></a>
+            <a href="https://twitter.com/garyan893" target="_blank" title="Twitter Profile"><i  class="fab fa-twitter twitter"></i></a>
+            <a href="https://instagram.com/aryan_gupta_01" target="_blank" title="Instagram Profile"><i class="fab fa-instagram instagram" ></i></a>
+            <a href="https://leetcode.com/u/garyan893/" target="_blank" title="LeetCode Profile"><i class="fa-solid fa-code leetcode"></i></a>
+        </div>
+    </div>
+</body>
+</html>

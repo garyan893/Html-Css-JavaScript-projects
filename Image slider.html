@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Image Slider</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .slider-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        #slider-image {
+            max-width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center;
+        }
+
+        #slider-image.slide-enter {
+            opacity: 0;
+            transform: scale(0.9) rotateY(45deg);
+        }
+
+        #slider-image.slide-enter-active {
+            opacity: 1;
+            transform: scale(1) rotateY(0);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(37, 117, 252, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(37, 117, 252, 0.4);
+        }
+
+        .nav-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 5px 10px rgba(37, 117, 252, 0.2);
+        }
+
+        .image-info {
+            color: white;
+            margin-top: 15px;
+            font-size: 16px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .slider-container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <img id="slider-image" src="" alt="Slider Image" class="slide-enter">
+        <div class="image-info">
+            <span id="current-image-number">0</span> / <span id="total-images">0</span>
+        </div>
+        <div class="navigation">
+            <button class="nav-btn" id="prev-btn">Previous</button>
+            <button class="nav-btn" id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <script>
+        
+        const images = [
+            'https://picsum.photos/800/500?random=1',
+            'https://picsum.photos/800/500?random=2',
+            'https://picsum.photos/800/500?random=3',
+            'https://picsum.photos/800/500?random=4',
+            'https://picsum.photos/800/500?random=5',
+            'https://picsum.photos/800/500?random=6',
+            'https://picsum.photos/800/500?random=7',
+            'https://picsum.photos/800/500?random=8',
+            'https://picsum.photos/800/500?random=9',
+            'https://picsum.photos/800/500?random=10',
+            'https://picsum.photos/800/500?random=11',
+            'https://picsum.photos/800/500?random=12',
+            'https://picsum.photos/800/500?random=13',
+            'https://picsum.photos/800/500?random=14',
+            'https://picsum.photos/800/500?random=15'
+        ];
+
+        
+        const sliderImage = document.getElementById('slider-image');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentImageNumber = document.getElementById('current-image-number');
+        const totalImages = document.getElementById('total-images');
+
+        
+        let currentIndex = 0;
+
+        
+        function initSlider() {
+            
+            totalImages.textContent = images.length;
+            
+            
+            loadImage(currentIndex);
+        }
+
+        
+        function loadImage(index) {
+        
+            sliderImage.classList.remove('slide-enter-active');
+            sliderImage.classList.add('slide-enter');
+            
+            
+            setTimeout(() => {
+                sliderImage.src = images[index];
+                sliderImage.classList.remove('slide-enter');
+                sliderImage.classList.add('slide-enter-active');
+                
+                
+                currentImageNumber.textContent = index + 1;
+            }, 300);
+        }
+
+        
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            loadImage(currentIndex);
+        }
+
+        
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            loadImage(currentIndex);
+        }
+
+        
+        nextBtn.addEventListener('click', nextImage);
+        prevBtn.addEventListener('click', prevImage);
+
+      
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+       
+        initSlider();
+    </script>
+</body>
+</html>
